@@ -1,17 +1,15 @@
-import express from "express"
+import express, {Express, Response, Request} from "express"
 import dotenv from "dotenv"
 
-const app = express()
-const port = 3000
+const app:Express = express()
+const port:Number = 3000
 
 //Cấu hình dotenv 
 dotenv.config();
 
 
-
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+app.get('/topics', (req: Request, res:Response) => {
+  res.send('Danh sách các chủ đề ')
 })
 
 app.listen(port, () => {
