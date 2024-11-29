@@ -1,6 +1,9 @@
 import express, {Express, Response, Request} from "express"
 import dotenv from "dotenv"
 import * as database from "./config/database";
+import Topics from "./models/topics.model";
+
+
 
 //Cấu hình dotenv 
 dotenv.config();
@@ -23,8 +26,14 @@ app.set("view engine","pug");
 
 
 
-app.get('/topics', (req: Request, res:Response) => {
-  res.render("client/pages/topics/index.pug")
+app.get('/topics', async (req: Request, res:Response) => {
+  const listTopics = await Topics.find({
+    deleted: false
+  })
+  console.log(listTopics)
+  res.render("client/pages/topics/index.pug",{
+    listTopics
+  })
 })
 
 app.listen(port, () => {
