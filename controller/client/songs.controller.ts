@@ -29,3 +29,36 @@ export const list = async (req: Request, res: Response) => {
     songs: songs,
   });
 };
+
+
+
+
+//[GET] localhost:3000/songs/detail/:slugSong
+export const detail = async (req: Request, res: Response) => {
+  const slugSong = req.params.slugSong;
+  const song = await Song.findOne({
+    slug: slugSong,
+    deleted: false,
+    status:"active"
+  })
+  const singer = await Singer.findOne({
+    _id: song.singerId,
+    status: "active",
+    deleted: false
+  }).select("fullName")
+
+  const topic = await Topics.findOne({
+    _id: song.topicId,
+    status: "active",
+    deleted: false
+  }).select("title")
+
+
+  res.render("client/pages/songs/detail.pug", {
+    pageTitle: "Trang chi tiet bai hat",
+    song: song,
+    singer: singer,
+    topic: topic
+  });
+};
+
