@@ -90,6 +90,7 @@ body{
     align-items: center;
     gap: 8px;
     transition: all 0.3s ease;
+    cursor: pointer;
   }
   
   .inner-singer:hover, .inner-like:hover {
@@ -299,3 +300,13 @@ body{
       font-size: 18px;
     }
   }
+
+
+.active i {
+  color: #166aee;
+}
+
+.active span{
+  color: #166aee;
+  font-weight: 900;
+}

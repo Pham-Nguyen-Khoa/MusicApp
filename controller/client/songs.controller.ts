@@ -62,3 +62,38 @@ export const detail = async (req: Request, res: Response) => {
   });
 };
 
+
+//[GET] localhost:3000/songs/:typeLike/:songID
+export const like = async (req: Request, res: Response) => {
+ try {
+    const typeLike:String = req.params.typeLike;
+    const songID:String = req.params.songID;
+    
+    const song = await Song.findOne({
+      _id: songID,
+      status: "active",
+      deleted: false
+    });
+
+    const newLike:Number = typeLike == "like" ? song.like + 1 : song.like -1 ;
+    const message:String = typeLike == "like" ? "Like bài hát thành công" : "Like bài hát thất bại";
+    await Song.updateOne({
+      _id:songID,
+      deleted: false,
+      status: "active"
+    },{
+      like: newLike
+    })
+    res.json({
+      code: 200,
+      message: message,
+      newLike: newLike
+    })
+    
+ } catch (error) {
+  res.json({
+    code: 400,
+    message: "Lỗi thích bài hát"
+  })
+ }
+};
