@@ -113,9 +113,21 @@ export const favorite = async (req: Request, res: Response) => {
      const songID:String = req.params.songID;
      switch(typeFavorite){
         case "favorite":{
+          const checkSong = await Song.findOne({
+            _id: songID,
+            deleted:  false,
+            status: "active"
+          })
           const favoriteExisted = await FavoriteSong.findOne({
             songId: songID
           })
+          if(!checkSong){
+          res.json({
+            code: 400,
+            message: "Không có bài hát nào có id này"
+          })
+          return;
+          }
           if(!favoriteExisted){
           const favorite = new FavoriteSong({
             songId: songID

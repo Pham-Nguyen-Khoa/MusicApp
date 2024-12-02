@@ -42,6 +42,12 @@ body{
   .song-item:hover .inner-image img {
     transform: scale(1.05);
   }
+  .song-item .active{
+    color: red
+  }
+  .song-item .active i {
+    color: red;
+  }
   
   /* Overlay khi hover ảnh */
   .inner-image::after {
@@ -310,3 +316,6 @@ body{
   color: #166aee;
   font-weight: 900;
 }
+
+
+
