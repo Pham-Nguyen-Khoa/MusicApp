@@ -11,7 +11,10 @@ router.get ("/:slugTopic" ,controller.list);
 router.get ("/detail/:slugSong" ,controller.detail);
 
 
-router.get ("/:typeLike/:songID" ,controller.like);
+router.patch ("/:typeLike/:songID" ,controller.like);
+
+router.patch ("/favorite/:typeFavorite/:songID" ,controller.favorite);
+
 
 
 export const songsRouter: Router =  router;

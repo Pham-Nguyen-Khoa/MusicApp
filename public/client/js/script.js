@@ -53,16 +53,52 @@ const btnLike = document.querySelector(".inner-like");
 if(btnLike){
   btnLike.addEventListener("click",() => {
     const songID = btnLike.getAttribute("data-songID");
+    console.log(songID)
     const btnActive = btnLike.classList.contains("active");
     const typeLike = btnActive ? "dislike" : "like";
     const link = `/songs/${typeLike}/${songID}`;
-    fetch(link)
+    console.log(typeLike)
+    console.log(link)
+    fetch(link,{
+      method: "PATCH"
+    })
       .then(res => res.json())
       .then(data => {
-        const contentLike = btnLike.querySelector("span");
+        if(data.code == 200){
+          const contentLike = btnLike.querySelector("span");
         contentLike.innerHTML = `${data.newLike} thích` 
         btnLike.classList.toggle("active");
+        }
+        
       })
   })
 }
 // End Button Like 
+
+
+
+// Button Favorite 
+const btnFavorite = document.querySelector(".inner-heart");
+if(btnFavorite){
+  btnFavorite.addEventListener("click",() => {
+    const songID = btnFavorite.getAttribute("data-songID");
+    console.log(songID)
+    const btnActive = btnFavorite.classList.contains("active");
+    const typeFavorite = btnActive ? "unfavorite" : "favorite";
+    const link = `/songs/favorite/${typeFavorite}/${songID}`;
+    console.log(typeFavorite)
+    console.log(link)
+    fetch(link,{
+      method: "PATCH"
+    })
+      .then(res => res.json())
+      .then(data => {
+        if(data.code == 200){
+        btnFavorite.classList.toggle("active");
+        }
+        
+      })
+  })
+}
+
+// End Button Favorite 
