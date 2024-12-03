@@ -43,6 +43,26 @@ if (aplayer) {
   ap.on("pause",() => {
     avatar.style.animationPlayState= "paused"
  })
+
+ setTimeout(() => {
+  ap.on("ended",() => {
+    const link = `/songs/listen/${dataSong._id}`;
+    fetch(link,{
+      method: "PATCH"
+    })
+      .then(res => res.json())
+      .then(data => {
+        if(data.code == 200){
+            const listen = document.querySelector(".inner-listen  span");
+            listen.innerHTML = `${data.listen} lượt nghe`
+        }
+        
+      })
+    })
+  
+ },3*60*1000)
+ 
+
 }
 
 // End Aplayer
@@ -53,12 +73,9 @@ const btnLike = document.querySelector(".inner-like");
 if(btnLike){
   btnLike.addEventListener("click",() => {
     const songID = btnLike.getAttribute("data-songID");
-    console.log(songID)
     const btnActive = btnLike.classList.contains("active");
     const typeLike = btnActive ? "dislike" : "like";
     const link = `/songs/${typeLike}/${songID}`;
-    console.log(typeLike)
-    console.log(link)
     fetch(link,{
       method: "PATCH"
     })
@@ -83,12 +100,9 @@ if(listbtnFavorite.length > 0){
   listbtnFavorite.forEach(btnFavorite => {
     btnFavorite.addEventListener("click",() => {
       const songID = btnFavorite.getAttribute("data-songID");
-      console.log(songID)
       const btnActive = btnFavorite.classList.contains("active");
       const typeFavorite = btnActive ? "unfavorite" : "favorite";
       const link = `/songs/favorite/${typeFavorite}/${songID}`;
-      console.log(typeFavorite)
-      console.log(link)
       fetch(link,{
         method: "PATCH"
       })
@@ -147,8 +161,10 @@ if(listbtnFavorite.length > 0){
     })
   }
 
-
-
 // End Search Suggest
+
+
+
+
 
 

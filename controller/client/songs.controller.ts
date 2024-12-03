@@ -162,3 +162,39 @@ export const favorite = async (req: Request, res: Response) => {
  
  
 
+
+ 
+//[GET] localhost:3000/songs/listen/:songID
+export const listen = async (req: Request, res: Response) => {
+  try {
+    const songID: String = req.params.songID;
+    const song = await Song.findOne({
+      _id: songID,
+      deleted: false, 
+      status: "active"
+    })
+    const newListen: Number = song.listen + 1;
+    await Song.updateOne({
+      _id: songID
+    },{
+      listen: newListen
+    })
+    const newSong = await Song.findOne({
+      _id: songID,
+      deleted: false, 
+      status: "active"
+    })
+    
+     res.json({
+       code: 200,
+       message: "Thành công",
+       listen: newSong.listen
+     })
+     
+  } catch (error) {
+   res.json({
+     code: 400,
+     message: "Lỗi thích bài hát"
+   })
+  }
+ };
