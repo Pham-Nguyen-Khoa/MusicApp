@@ -1,15 +1,15 @@
 
 import { Request,Response } from "express"
-
 import Topics from "../../models/topics.model"
 
-//[GET] localhost:3000/topics
+//[GET] localhost:3000/admin/topics
 export const topics = async (req: Request, res:Response) => {
     const topics = await Topics.find({
-      deleted: false
+        deleted: false,
+        status: "active"
     })
-    res.render("client/pages/topic/index.pug",{
-        pageTitle: "Trang chủ đề bài hát",
+\    res.render("admin/pages/topic/index.pug",{
+        pageTitle: " Quản lý chủ đề ",
         topics: topics
     })
   }

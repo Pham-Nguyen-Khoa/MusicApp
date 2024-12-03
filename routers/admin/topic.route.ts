@@ -6,7 +6,10 @@ import * as controller from "../../controller/admin/topic.controller";
 
 const router: Router = Router();
 
-router.get ("/" ,controller.topics);
+router.get ("/" ,controller.index);
 
 
-export const topicRouter: Router =  router;
+
+
+
+export const dashboardRouter: Router =  router;

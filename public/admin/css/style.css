@@ -85,3 +85,156 @@
 .inner-menu ul li a.active i {
     transform: translateX(3px);
 }
+
+.main{
+    flex: 1;
+    margin-left: 260px; /* Phải bằng width của sidebar */
+    padding: 20px;
+    background: #f5f7fb;
+    min-height: 100vh;
+}
+
+
+
+.topics-page {
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-title {
+    font-size: 24px;
+    color: #333;
+    font-weight: 600;
+}
+
+.btn-add {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.btn-add:hover {
+    background: #45a049;
+    transform: translateY(-1px);
+}
+
+.topics-table {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #f5f5f5;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #444;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.index {
+    width: 60px;
+    color: #666;
+}
+
+.image img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.title {
+    font-weight: 500;
+    color: #333;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.status-badge.active {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-badge.inactive {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-action {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    color: white;
+    transition: all 0.2s;
+}
+
+.btn-view {
+    background: #2196F3;
+}
+
+.btn-edit {
+    background: #FFC107;
+}
+
+.btn-delete {
+    background: #F44336;
+}
+
+.btn-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .topics-table {
+        overflow-x: scroll;
+    }
+    
+    .actions {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .btn-action {
+        width: 32px;
+        height: 32px;
+    }
+}
