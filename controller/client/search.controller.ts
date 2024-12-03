@@ -6,8 +6,9 @@ import Singer from "../../models/singer.model";
 import { convertToSlug } from "../../helpers/convertToSlug";
 
 
-//[GET] localhost:3000/search/result?keyword=
+//[GET] localhost:3000/search/:type?keyword=
 export const search = async (req: Request, res:Response) => {
+    const type = req.params.type;
     const keyword: string = `${req.query.keyword}`;
     let newSong = [];
   
@@ -21,20 +22,43 @@ export const search = async (req: Request, res:Response) => {
                 {slug: stringSlugRegex}
             ]
         }: {})
+        
         for (const song of songs) {
             const infoSinger = await Singer.findOne({
                 _id: song.singerId
             })
-            song["infoSinger"] = infoSinger
+            // song["infoSinger"] = infoSinger
+            newSong.push({
+                id: song.id,
+                avatar: song.avatar,
+                title: song.title,
+                like: song.like,
+                slug: song.slug,
+                infoSinger: {
+                    fullName: infoSinger.fullName
+                }
+            })
+        }    
+        switch(type){
+            case "result":{
+                res.render("client/pages/search/result.pug",{
+                    pageTitle: `Ket qua ${keyword}`,
+                    keyword: keyword,
+                    songs: newSong
+                    
+                })
+                break;
+            }
+            case "suggest": {
+                res.json({
+                    code: 200, 
+                    message: "Thành công",
+                    songs: newSong
+                })
+                break;
+            }
+            default:
+                break;
         }
-           
-        newSong = songs
-    
-
-    res.render("client/pages/search/result.pug",{
-        pageTitle: `Ket qua ${keyword}`,
-        keyword: keyword,
-        songs: newSong
-        
-    })
+   
   }

@@ -17,11 +17,22 @@ header
         // Add search bar here
         .search-bar
           form(action='/search/result' method='GET')
-            input(
-              type='text'
-              name='keyword'
-              placeholder='Tìm kiếm...'
-              class='form-control'
-              value=keyword
-            )
-            button(type='submit' class='btn btn-search') <i class="fa-solid fa-search"></i>
+            .search-container
+              input(
+                type='text'
+                name='keyword'
+                placeholder='Tìm kiếm...'
+                class='form-control'
+                value=keyword
+                id='search-input'
+              )
+              button(type='submit' class='btn btn-search')
+                i(class="fa-solid fa-search")
+              .suggestions-container
+                //- Mẫu cho mỗi suggestion item
+                .suggestion-item
+                  a(href="/songs/detail/cat-doi-noi-sau") 
+                    img(src="https://backend.daca.vn/assets/images/cat-doi-noi-sau.jpg", alt="Song thumbnail")
+                    .suggestion-content
+                      .song-name Cát đối nổi sầu
+                      .artist-name Tăng Duy Tân

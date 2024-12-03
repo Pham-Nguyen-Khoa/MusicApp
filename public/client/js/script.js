@@ -106,3 +106,49 @@ if(listbtnFavorite.length > 0){
 // End Button Favorite 
 
 
+
+// Search Suggest
+  const boxSearch = document.querySelector(".search-bar");
+  if(boxSearch){
+    const inputSearch = boxSearch.querySelector("input[name=keyword]");
+    const suggestContainer = document.querySelector(".suggestions-container");
+    inputSearch.addEventListener("keyup",() => {
+      const keyword = inputSearch.value.trim();
+      if( keyword !== ""){
+        const link = `/search/suggest?keyword=${keyword}`;
+        fetch(link)
+          .then(res => res.json())
+          .then(data => {
+              if(data.songs.length > 0){
+                suggestContainer.classList.add("show");
+                const htmls = data.songs.map(song => {
+                  return `
+                    <div class="suggestion-item">
+                        <a href="/songs/detail/${song.slug}">
+                          <img src="${song.avatar}" alt="Song thumbnail">
+                          <div class="suggestion-content">
+                            <div class="song-name">${song.title}</div>
+                            <div class="artist-name">${song.infoSinger.fullName}</div>
+                          </div>
+                        </a>
+                      </div>
+                  `
+                })
+                suggestContainer.innerHTML = htmls.join("");
+              }else{
+                suggestContainer.classList.remove("show");
+              }
+          })
+      }else{
+        suggestContainer.classList.remove("show");
+      }
+     
+
+    })
+  }
+
+
+
+// End Search Suggest
+
+
