@@ -1,0 +1,38 @@
+.sider
+    .inner-menu
+        .logo
+            img(src="/admin/img/avatar.jpg", alt="Logo")
+            span  Neronmen Admin
+        ul
+            li
+                a(href=`${prefixAdmin}/dashboard` class="active")
+                    i.fas.fa-chart-line
+                    span Tổng quan
+            li
+                a(href=`${prefixAdmin}/topics`)
+                    i.fas.fa-layer-group
+                    span Quản lý chủ đề
+            li
+                a(href=`${prefixAdmin}/songs`)
+                    i.fas.fa-music
+                    span Quản lý bài hát
+            li
+                a(href=`${prefixAdmin}/singers`)
+                    i.fas.fa-microphone
+                    span Quản lý ca sĩ
+            li
+                a(href=`${prefixAdmin}/roles/permission`)
+                    i.fas.fa-user-shield
+                    span Phân quyền
+            li
+                a(href=`${prefixAdmin}/accounts`)
+                    i.fas.fa-user-cog
+                    span Tài khoản admin
+            li
+                a(href=`${prefixAdmin}/accounts`)
+                    i.fas.fa-users
+                    span Tài khoản user
+            li
+                a(href=`${prefixAdmin}/settings`)
+                    i.fas.fa-cog
+                    span Cài đặt chung
