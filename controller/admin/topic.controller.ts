@@ -8,7 +8,7 @@ export const topics = async (req: Request, res:Response) => {
         deleted: false,
         status: "active"
     })
-\    res.render("admin/pages/topic/index.pug",{
+   res.render("admin/pages/topic/index.pug",{
         pageTitle: " Quản lý chủ đề ",
         topics: topics
     })
