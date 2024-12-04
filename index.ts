@@ -1,13 +1,17 @@
-import express, {Express, Response, Request} from "express"
 import dotenv from "dotenv"
+//Cấu hình dotenv 
+dotenv.config();
+import express, {Express, Response, Request} from "express"
+
+import bodyParser from "body-parser"
 import * as database from "./config/database";
 
 import routerClient from "./routers/client/index";
 import routerAdmin from "./routers/admin/index.route";
 import { systemConfig } from "./config/config";
 import path from "path";
-//Cấu hình dotenv 
-dotenv.config();
+
+
 
 
 //Connect Database
@@ -17,6 +21,10 @@ database.connect();
 const app:Express = express()
 const port: String | Number  = process.env.PORT || 3000;
 
+
+// Cấu hình body-parser
+// app.use(bodyParser.urlencoded({extended: false}))
+app.use(express.json())
 
 //Cấu hình views
 app.set("views","./views");

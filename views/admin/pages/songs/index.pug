@@ -22,7 +22,7 @@ block main
                 tbody 
                     each item, index in songs 
                         tr 
-                            td.index #{index + 1}
+                            td.index #{songs.length - index }
                             td.image
                                 img(src=item.avatar, alt=item.title)
                             td.title #{item.title}
