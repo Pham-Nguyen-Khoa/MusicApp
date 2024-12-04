@@ -8,7 +8,7 @@ export const topics = async (req: Request, res:Response) => {
     const topics = await Topics.find({
       deleted: false
     })
-    res.render("client/pages/topic/index.pug",{
+    res.render("client/pages/topics/index.pug",{
         pageTitle: "Trang chủ đề bài hát",
         topics: topics
     })

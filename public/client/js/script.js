@@ -163,8 +163,3 @@ if(listbtnFavorite.length > 0){
 
 // End Search Suggest
 
-
-
-
-
-

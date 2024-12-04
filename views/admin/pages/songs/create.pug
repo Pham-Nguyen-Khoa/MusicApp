@@ -1,0 +1,77 @@
+extends ../../layouts/default.pug
+
+block main
+  .content-wrapper
+    .form-container
+      .page-header
+        h1.page-title
+          i.fas.fa-music.me-2
+          | Thêm mới bài hát
+
+      form(method="POST" action=`${prefixAdmin}/songs/create` enctype="multipart/form-data")
+        .form-group
+          label.form-label(for="title") Tiêu đề bài hát
+          input#title.form-control(
+            type="text" 
+            name="title" 
+            placeholder="Nhập tiêu đề bài hát"
+            required
+          )
+
+        .form-group
+          label.form-label(for="category") Thể loại
+          select#category.form-control.form-select(name="topicId" required)
+            option(value="" disabled selected) -- Chọn thể loại --
+            each topic in topics 
+              option(value=topic.id) #{topic.title}
+            
+
+        .form-group
+          label.form-label(for="artist") Ca sĩ
+          select#artist.form-control.form-select(name="singerId" required)
+            option(value="" disabled selected) -- Chọn ca sĩ --
+             each singer in singers 
+              option(value=singer.id) #{singer.fullName}
+
+        .form-group
+          label.form-label(for="avatar") Ảnh bìa
+          .file-upload
+            label.file-upload-label
+              i.fas.fa-cloud-upload-alt
+              span Chọn ảnh hoặc kéo thả vào đây
+              input#image(type="file" name="avatar" accept="image/*")
+            .image-preview#imagePreview
+              img#previewImg(src="", alt="Preview")
+              button.remove-image#removeImage(type="button")
+                i.fas.fa-times
+
+        .form-group
+          label.form-label(for="description") Mô tả
+          textarea(name="desc" type="text" class="textarea-mce" rows="5" placeholder="Nhập mô tả về bài hát...") 
+
+        .form-group
+          label.form-label Trạng thái
+          .status-group
+            .form-check
+              input#active.form-check-input(
+                type="radio"
+                name="status"
+                value="active"
+                checked
+              )
+              label.form-check-label(for="active") Hoạt động
+            .form-check
+              input#inactive.form-check-input(
+                type="radio"
+                name="status"
+                value="inactive"
+              )
+              label.form-check-label(for="inactive") Dừng hoạt động
+
+        .btn-group
+          button.btn.btn-secondary(type="reset") 
+            i.fas.fa-times.me-2
+            | Hủy
+          button.btn.btn-primary(type="submit")
+            i.fas.fa-save.me-2
+            | Lưu bài hát     

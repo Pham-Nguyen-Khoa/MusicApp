@@ -3,7 +3,7 @@
 import {Express} from "express"
 import { dashboardRouter } from "./dashboard.route";
 import {systemConfig} from "../../config/config";
-import { topicRouter } from "../client/topic.router";
+import { topicRouter } from "./topic.route";
 import { songRouter } from "./song.route";
 
 

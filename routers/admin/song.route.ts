@@ -8,6 +8,8 @@ const router: Router = Router();
 
 router.get ("/" ,controller.song);
 
+router.get ("/create" ,controller.create);
+
 
 
 
