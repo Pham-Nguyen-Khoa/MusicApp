@@ -57,3 +57,20 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+
+
+
+  const uploadAudio = document.querySelector("[upload-audio]");
+  if(uploadAudio){
+    const uploadAudioInput = uploadAudio.querySelector("[upload-audio-input]");
+    const uploadAudioPlay = uploadAudio.querySelector("[upload-audio-play]");
+    const source = uploadAudioPlay.querySelector("source");
+    uploadAudioInput.addEventListener("change",(e) => {
+      if(e.target.files.length > 0){
+        const audio = URL.createObjectURL(e.target.files[0]);
+        source.src = audio;
+        uploadAudioPlay.load();
+      }
+
+    } )
+  }

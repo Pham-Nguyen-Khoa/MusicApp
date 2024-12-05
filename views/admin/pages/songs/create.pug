@@ -44,6 +44,17 @@ block main
               img#previewImg(src="", alt="Preview")
               button.remove-image#removeImage(type="button")
                 i.fas.fa-times
+        //- .form-group
+        //-   label.form-label(for="audio") File Âm thanh
+        //-   .file-upload
+        //-     label.file-upload-label
+        //-       i.fas.fa-cloud-upload-alt
+        //-       span Chọn file audio hoặc kéo thả vào đây
+        .form-group(upload-audio)
+          input(type="file" name="audio"  class="from-control" accept="audio/*" upload-audio-input)
+          audio( controls upload-audio-play  class="from-control") 
+            source(src="")
+
 
         .form-group
           label.form-label(for="description") Mô tả

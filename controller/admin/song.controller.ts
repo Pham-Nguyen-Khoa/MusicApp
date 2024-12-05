@@ -55,13 +55,22 @@ export const create = async (req: Request, res: Response) => {
 
 //[POST] localhost:3000/admin/songs/create
 export const createPost = async (req: Request, res: Response) => {
+  let avatar = ""
+  if(req.body.avatar){
+    avatar = req.body.avatar[0];
+  }
+  let audio = ""
+  if(req.body.audio){
+    audio = req.body.audio[0];
+  }
     const dataSong = {
       title: req.body.title,
       topicId: req.body.topicId,
       singerId: req.body.singerId,
       description: req.body.desc,
       status: req.body.status,
-      avatar: req.body.avatar
+      avatar: avatar,
+      audio: audio
     }
     const song = new Song(dataSong);
     await song.save();
