@@ -2,12 +2,12 @@
 const aplayer = document.querySelector("#aplayer");
 if (aplayer) {
   let dataSong = aplayer.getAttribute("data-song");
- 
   let dataSinger = aplayer.getAttribute("data-singer");
   dataSong = JSON.parse(dataSong);
   dataSinger = JSON.parse(dataSinger);
   const ap = new APlayer({
     container: aplayer,
+    lrcType: 1,
     audio: [
       {
         name: dataSong.title,
@@ -16,6 +16,7 @@ if (aplayer) {
         cover: dataSong.avatar,
         theme: "#ebd0c2",
         type: "auto",
+          lrc: dataSong.lyrics
       },
     ],
     // Các tùy chọn player

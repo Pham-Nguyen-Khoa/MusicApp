@@ -15,7 +15,7 @@ export const list = async (req: Request, res: Response) => {
     topicId: topic.id,
     deleted: "false",
     status: "active",
-  }).select("avatar title slug singerId like ");
+  }).select("avatar title slug singerId like lyrics ");
   for (let song of songs) {
     const infoSinger = await Singer.findOne({
       _id: song.singerId,
@@ -58,7 +58,6 @@ export const detail = async (req: Request, res: Response) => {
     songId: song.id
   })
   song["favoriteSong"] = favoriteSong;
-  
 
   res.render("client/pages/songs/detail.pug", {
     pageTitle: "Trang chi tiet bai hat",

@@ -462,3 +462,8 @@ header {
   color: #1a73e8; /* Màu xanh như trong ảnh */
   padding: 5px 10px;
 }
+
+
+.singer-detail .inner-text {
+  white-space: pre;
+}

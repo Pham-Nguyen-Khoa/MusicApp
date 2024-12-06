@@ -6,9 +6,10 @@ block main
       .page-header
         h1.page-title
           i.fas.fa-music.me-2
-          | Thêm mới bài hát
+          | Chỉnh sửa bài hát
 
-      form(method="POST" action=`${prefixAdmin}/songs/create` enctype="multipart/form-data")
+      form(action=`${prefixAdmin}/songs/edit/${song.id}?_method=PATCH` method="POST" enctype="multipart/form-data")
+        input(type="hidden" name="_method" value="PATCH")
         .form-group
           label.form-label(for="title") Tiêu đề bài hát
           input#title.form-control(
@@ -16,14 +17,15 @@ block main
             name="title" 
             placeholder="Nhập tiêu đề bài hát"
             required
+            value=song.title 
           )
-
+        
         .form-group
           label.form-label(for="category") Thể loại
           select#category.form-control.form-select(name="topicId" required)
             option(value="" disabled selected) -- Chọn thể loại --
             each topic in topics 
-              option(value=topic.id) #{topic.title}
+              option(value=topic.id  selected=(topic.id == song.topicId ? true: false) ) #{topic.title}
             
 
         .form-group
@@ -31,7 +33,7 @@ block main
           select#artist.form-control.form-select(name="singerId" required)
             option(value="" disabled selected) -- Chọn ca sĩ --
              each singer in singers 
-              option(value=singer.id) #{singer.fullName}
+              option(value=singer.id selected=(singer.id == song.singerId ? true: false)) #{singer.fullName}
 
         .form-group
           label.form-label(for="avatar") Ảnh bìa
@@ -40,22 +42,21 @@ block main
               i.fas.fa-cloud-upload-alt
               span Chọn ảnh hoặc kéo thả vào đây
               input#image(type="file" name="avatar" accept="image/*")
-            .image-preview#imagePreview
-              img#previewImg(src="", alt="Preview")
+            .image-preview#imagePreview.active
+              img#previewImg(src=song.avatar, alt="Preview")
               button.remove-image#removeImage(type="button")
                 i.fas.fa-times
         .form-group(upload-audio)
           input(type="file" name="audio"  class="from-control" accept="audio/*" upload-audio-input)
           audio( controls upload-audio-play  class="from-control") 
-            source(src="")
+            source(src=song.audio)
         .form-group
-          label.form-label(for="lyrics") Mô tả
-          textarea(name="lyrics" type="text"  cols="85" rows= "20" placeholder="Nhập lời bài hát") 
-
+          label.form-label(for="lyrics") Lời bài hát
+          textarea(name="lyrics" type="text"  cols="85" rows= "20" placeholder="Nhập lời bài hát")   #{song.lyrics}
 
         .form-group
           label.form-label(for="description") Mô tả
-          textarea(name="desc" type="text" class="textarea-mce" rows="5" placeholder="Nhập mô tả về bài hát...") 
+          textarea(name="desc" type="text" class="textarea-mce" rows="5" placeholder="Nhập mô tả về bài hát...") !{song.description}
 
         .form-group
           label.form-label Trạng thái
@@ -65,7 +66,8 @@ block main
                 type="radio"
                 name="status"
                 value="active"
-                checked
+                checked= (song.status == "active"? true: false)
+                
               )
               label.form-check-label(for="active") Hoạt động
             .form-check
@@ -73,6 +75,7 @@ block main
                 type="radio"
                 name="status"
                 value="inactive"
+                checked= (song.status == "inactive"? true: false)
               )
               label.form-check-label(for="inactive") Dừng hoạt động
 

@@ -1,16 +1,21 @@
 import dotenv from "dotenv"
 //Cấu hình dotenv 
 dotenv.config();
+// Import để dùng được method PATCH
+
 import express, {Express, Response, Request} from "express"
 
-import bodyParser from "body-parser"
+import bodyParser from "body-parser";
 import * as database from "./config/database";
+
+
+
 
 import routerClient from "./routers/client/index";
 import routerAdmin from "./routers/admin/index.route";
 import { systemConfig } from "./config/config";
 import path from "path";
-
+import methodOverride from "method-override";
 
 
 
@@ -22,9 +27,13 @@ const app:Express = express()
 const port: String | Number  = process.env.PORT || 3000;
 
 
+
+
 // Cấu hình body-parser
-// app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.json())
+
+app.use(methodOverride("_method"));
 
 //Cấu hình views
 app.set("views","./views");

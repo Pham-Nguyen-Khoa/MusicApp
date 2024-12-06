@@ -17,6 +17,10 @@ router.get ("/" ,controller.song);
 
 router.get ("/create" ,controller.create);
 
+router.get ("/edit/:id" ,controller.edit);
+
+router.patch ("/edit/:id" ,upload.fields([{name: "avatar", maxCount: 1}, {name: "audio", maxCount: 1}]),upploadCloud.uploadFields,  controller.editPatch);
+
 router.post ("/create" ,upload.fields([{name: "avatar", maxCount: 1}, {name: "audio", maxCount: 1}]),upploadCloud.uploadFields, controller.createPost);
 
 
