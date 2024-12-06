@@ -36,7 +36,7 @@ app.use(express.json())
 app.use(methodOverride("_method"));
 
 //Cấu hình views
-app.set("views","./views");
+app.set("views",`${__dirname}/views`);
 app.set("view engine","pug");
 
 // TinyMCE
@@ -44,7 +44,7 @@ app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce
 // End TinyMCE
 
 //Cấu hình file tĩnh
-app.use(express.static("public"));
+app.use(express.static(`${__dirname}/public`));
 
 // App local variables
 app.locals.prefixAdmin = systemConfig.prefixAdmin;

@@ -1,0 +1,32 @@
+header
+  nav
+    .nav-bar
+      i.bx.bx-menu.sidebarOpen
+      .menu
+        .logo-toggle
+          span.logo
+            a(href='#') CodingLab
+          i.bx.bx-x.siderbarClose
+        ul.nav-links
+          li
+            a(href='/') <i class="fa-solid fa-home"></i> Trang chủ
+          li  
+            a(href='/topics') <i class="fa-solid fa-music"></i> Chủ đề
+          li  
+            a(href='/favorite-songs') <i class="fa-solid fa-heart"></i> Yêu thích
+        // Add search bar here
+        .search-bar
+          form(action='/search/result' method='GET')
+            .search-container
+              input(
+                type='text'
+                name='keyword'
+                placeholder='Tìm kiếm...'
+                class='form-control'
+                value=keyword
+                id='search-input'
+              )
+              button(type='submit' class='btn btn-search')
+                i(class="fa-solid fa-search")
+              .suggestions-container
+                //- Mẫu cho mỗi suggestion item

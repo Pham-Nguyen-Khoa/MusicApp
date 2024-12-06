@@ -1,0 +1,38 @@
+extends ../../layouts/default.pug
+
+block main
+    .topics-page
+        .page-header
+            h1.page-title #{pageTitle}
+            a(href=`${prefixAdmin}/topics/create` class="btn-add")
+                i.fas.fa-plus
+                span Thêm mới
+
+        .topics-table
+            table
+                thead 
+                    tr 
+                        th STT 
+                        th Hình ảnh 
+                        th Tiêu đề 
+                        th Trạng thái 
+                        th Hành động
+                tbody 
+                    each item, index in topics 
+                        tr 
+                            td.index #{index + 1}
+                            td.image
+                                img(src=item.avatar, alt=item.title)
+                            td.title #{item.title}
+                            td.status
+                                if(item.status == "active")
+                                    span.status-badge.active Hoạt động
+                                else 
+                                    span.status-badge.inactive Dừng hoạt động
+                            td.actions
+                                a(href=`${prefixAdmin}/topics/detail/${item.id}` class="btn-action btn-view")
+                                    i.fas.fa-eye
+                                a(href=`${prefixAdmin}/topics/edit/${item.id}` class="btn-action btn-edit")
+                                    i.fas.fa-edit
+                                a(href=`${prefixAdmin}/topics/delete/${item.id}` class="btn-action btn-delete")
+                                    i.fas.fa-trash

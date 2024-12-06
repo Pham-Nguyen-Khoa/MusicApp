@@ -1,0 +1,88 @@
+extends ../../layouts/default.pug
+
+block main
+  .content-wrapper
+    .form-container
+      .page-header
+        h1.page-title
+          i.fas.fa-music.me-2
+          | Chỉnh sửa bài hát
+
+      form(action=`${prefixAdmin}/songs/edit/${song.id}?_method=PATCH` method="POST" enctype="multipart/form-data")
+        input(type="hidden" name="_method" value="PATCH")
+        .form-group
+          label.form-label(for="title") Tiêu đề bài hát
+          input#title.form-control(
+            type="text" 
+            name="title" 
+            placeholder="Nhập tiêu đề bài hát"
+            required
+            value=song.title 
+          )
+        
+        .form-group
+          label.form-label(for="category") Thể loại
+          select#category.form-control.form-select(name="topicId" required)
+            option(value="" disabled selected) -- Chọn thể loại --
+            each topic in topics 
+              option(value=topic.id  selected=(topic.id == song.topicId ? true: false) ) #{topic.title}
+            
+
+        .form-group
+          label.form-label(for="artist") Ca sĩ
+          select#artist.form-control.form-select(name="singerId" required)
+            option(value="" disabled selected) -- Chọn ca sĩ --
+             each singer in singers 
+              option(value=singer.id selected=(singer.id == song.singerId ? true: false)) #{singer.fullName}
+
+        .form-group
+          label.form-label(for="avatar") Ảnh bìa
+          .file-upload
+            label.file-upload-label
+              i.fas.fa-cloud-upload-alt
+              span Chọn ảnh hoặc kéo thả vào đây
+              input#image(type="file" name="avatar" accept="image/*")
+            .image-preview#imagePreview.active
+              img#previewImg(src=song.avatar, alt="Preview")
+              button.remove-image#removeImage(type="button")
+                i.fas.fa-times
+        .form-group(upload-audio)
+          input(type="file" name="audio"  class="from-control" accept="audio/*" upload-audio-input)
+          audio( controls upload-audio-play  class="from-control") 
+            source(src=song.audio)
+        .form-group
+          label.form-label(for="lyrics") Lời bài hát
+          textarea(name="lyrics" type="text"  cols="85" rows= "20" placeholder="Nhập lời bài hát")   #{song.lyrics}
+
+        .form-group
+          label.form-label(for="description") Mô tả
+          textarea(name="desc" type="text" class="textarea-mce" rows="5" placeholder="Nhập mô tả về bài hát...") !{song.description}
+
+        .form-group
+          label.form-label Trạng thái
+          .status-group
+            .form-check
+              input#active.form-check-input(
+                type="radio"
+                name="status"
+                value="active"
+                checked= (song.status == "active"? true: false)
+                
+              )
+              label.form-check-label(for="active") Hoạt động
+            .form-check
+              input#inactive.form-check-input(
+                type="radio"
+                name="status"
+                value="inactive"
+                checked= (song.status == "inactive"? true: false)
+              )
+              label.form-check-label(for="inactive") Dừng hoạt động
+
+        .btn-group
+          button.btn.btn-secondary(type="reset") 
+            i.fas.fa-times.me-2
+            | Hủy
+          button.btn.btn-primary(type="submit")
+            i.fas.fa-save.me-2
+            | Lưu bài hát     

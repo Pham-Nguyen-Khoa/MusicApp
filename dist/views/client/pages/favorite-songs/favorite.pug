@@ -1,0 +1,26 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+block main 
+    .container.my-3 
+        .row 
+            .col-12 
+                .box-head 
+                    +box-head("Danh sách bài hát yêu thích")
+        
+        .row 
+            each item in favoriteSongs
+                .col-6.mb-3
+                    .song-item
+                        .inner-image
+                        a(href=`/songs/detail/${item.infoSong.slug}`)
+                            img(src=item.infoSong.avatar alt="Song Image")
+                        .inner-content
+                        a.inner-title(href=`/songs/detail/${item.infoSong.slug}`) #{item.infoSong.title}
+                        .inner-singer
+                            i.fa-solid.fa-microphone-lines
+                            | #{item.infoSinger.fullName}
+                        .inner-heart.active(data-songID = item.songId)
+                            <i class="fa-regular fa-heart "></i> yêu thích
+                        .inner-time
+                            i.fa-regular.fa-clock
+                            |  Hôm nay
